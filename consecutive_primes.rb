@@ -5,8 +5,8 @@ class ConsecutivePrime
     @limit = limit
     boolean_prime_array
     find_primes
-    prime_array
-    find_consecutive_prime
+    primes_array
+    find_consecutive_primes
     show_result
   end
 
@@ -16,15 +16,15 @@ class ConsecutivePrime
     @is_prime = Array.new(@limit + 1, false)
     @is_prime[2] = true
     @is_prime[3] = true
-    @sqr_lim = Math.sqrt(@limit)
   end
 
   def find_primes
+    sqr_lim = Math.sqrt(@limit)
     x2 = 0
-    (1..@sqr_lim).each do |i|
+    (1..sqr_lim).each do |i|
       x2 += 2 * i - 1
       y2 = 0
-      (1..@sqr_lim).each do |j|
+      (1..sqr_lim).each do |j|
         y2 += 2 * j - 1
         n = 4 * x2 + y2
         @is_prime[n] = !@is_prime[n] if (n <= @limit) && (n % 12 == 1 || n % 12 == 5)
@@ -34,7 +34,7 @@ class ConsecutivePrime
         @is_prime[n] = !@is_prime[n] if (i > j) && (n <= @limit) && (n % 12 == 11)
       end
     end
-    (5..@sqr_lim).each do |i|
+    (5..sqr_lim).each do |i|
       if @is_prime[i]
         n = i * i
         j = n
@@ -46,12 +46,12 @@ class ConsecutivePrime
     end
   end
 
-  def prime_array
+  def primes_array
     @primes = []
     @is_prime.each_with_index {|el, i| @primes << i if el }
   end
 
-  def find_consecutive_prime
+  def find_consecutive_primes
     @hash = {}
     total_sum = @primes.inject(0, :+)
     limit = @primes.count - 1
