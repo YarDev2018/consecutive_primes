@@ -84,5 +84,5 @@ class ConsecutivePrime
   end
 end
 
-result = Benchmark.realtime { ConsecutivePrime.new(100000)}
+result = Benchmark.realtime { ConsecutivePrime.new(1000000)}
 puts "Calculating time of the consecutive primes - #{result}s"
