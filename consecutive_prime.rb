@@ -79,35 +79,6 @@ class ConsecutivePrime
     end
   end
 
-  def find_consecutive_prime_1
-    @hash = {}
-    (1..@limit).each do |i|
-      next unless @is_prime[i]
-      array = []
-      result_prime = 0
-      sum = 0
-      @is_prime.each_with_index do |el,index|
-        next if index < i
-        next unless el
-        sum += index
-        break if index >= @limit
-        result_prime = sum if @is_prime[sum]
-        array.push index
-      end
-      sum = 0
-      terms = []
-      array.each do |el|
-        sum += el
-        break if sum > result_prime
-        terms << el
-      end
-      next if terms.count.zero?
-      @hash[i] = {prime: result_prime, terms_count: terms.count }
-    end
-    @result = @hash.map{|k,val|val}.max_by{|hash|hash[:terms_count]}
-  end
-
-
   def show_result
     puts "The longest sum of consecutive primes below #{@limit} contains #{@hash[:terms_count]} terms and is equal to #{@hash[:prime]}"
   end
